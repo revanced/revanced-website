@@ -183,16 +183,14 @@
 			</PackageMenu>
 		</aside>
 
-		<div class="patches-container">
-			{#each filter(data.patches, selectedPkg || '', displayedTerm) as patch}
-				<!-- Trigger new animations when package or search changes (I love Svelte) -->
-				{#key selectedPkg || displayedTerm}
-					<div in:fly={{ y: 10, easing: quintOut, duration: 750 }}>
-						<PatchItem {patch} bind:showAllVersions />
-					</div>
-				{/key}
-			{/each}
-		</div>
+		{#key selectedPkg || displayedTerm}
+			<!-- Trigger new animations when package or search changes (I love Svelte) -->
+			<div class="patches-container" in:fly={{ y: 10, easing: quintOut, duration: 750 }}>
+				{#each filter(data.patches, selectedPkg || '', displayedTerm) as patch}
+					<PatchItem {patch} bind:showAllVersions />
+				{/each}
+			</div>
+		{/key}
 	</Query>
 </main>
 <Footer />
